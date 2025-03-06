@@ -1,6 +1,6 @@
 import './App.css';
 // import React, { useState, useEffect, useRef, useCallback  } from 'react';
-import { BrowserRouter as Router, Route, Link, Switch, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 // import { CSSTransition } from 'react-transition-group';
 // import { useSwipeable } from 'react-swipeable';
 // import { FaRegUser, FaPhone, FaStar, FaTimes } from "react-icons/fa";
@@ -9,7 +9,6 @@ import { BrowserRouter as Router, Route, Link, Switch, Routes } from "react-rout
 import Home from './components/home';
 // import Login from './Pages/login';
 // import './register.jsx'
-
 function App() {
   // <Home />
   return (

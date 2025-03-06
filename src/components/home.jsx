@@ -1,11 +1,23 @@
 import React, { useState, useEffect, useRef, useCallback  } from 'react';
 import './home.css';
+import { useTranslation } from 'react-i18next';
 import { CSSTransition } from 'react-transition-group';
 import { useSwipeable } from 'react-swipeable';
 import { FaRegUser, FaPhone, FaStar, FaTimes } from "react-icons/fa";
 import { TbUserPlus, TbUser } from "react-icons/tb";
 
 function Home() {
+
+    const { t, i18n } = useTranslation();
+
+    const changeLanguage = (lng) => {
+        i18n.changeLanguage(lng);
+        
+        // تحديد اتجاه الصفحة بناءً على اللغة
+        const rtlLanguages = ['ar', 'fa', 'he', 'ur']; // قائمة اللغات التي تكتب من اليمين إلى اليسار
+        document.documentElement.dir = rtlLanguages.includes(lng) ? 'rtl' : 'ltr';
+        document.documentElement.lang = lng;
+    };
 
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -117,13 +129,13 @@ function Home() {
         <div ref={dropdownRef} className={`dropdown ${isDropdownVisible ? 'visible' : ''}`}>
           <div className="dropdown-content">
             <ul>
-            <li><a href="./register.jsx"><div>
+            <li><a href="#"><div>
                     <TbUser className='dropDownIcon' />
                   </div>
                   <p>Sign In</p>
                 </a>
               </li>
-              <li><a href="./register.jsx"><div>
+              <li><a href="#"><div>
               <TbUserPlus className='dropDownIcon' />
                 </div>
                 <p>Create Account</p>
@@ -134,24 +146,24 @@ function Home() {
         </div>
         <div className="secondNav">
           <ul>
-            <li><a href='#'>Translations of Quran</a></li>
-            <li><a href='#'>Interactive files</a></li>
-            <li><a href='#'>Islamic applications</a></li>
-            <li><a href='#'>Another Islamic sites</a></li>
+            <li><a href='#'>{t('Translations of Quran')}</a></li>
+            <li><a href='#'>{t('Interactive files')}</a></li>
+            <li><a href='#'>{t('Islamic applications')}</a></li>
+            <li><a href='#'>{t('Another Islamic sites')}</a></li>
           </ul>
           <li className="languageDropdown">
             <a>Language</a>
-              <ul className="languageDropdownContent">
-                <li><a href='#'>English</a></li>
-                <li><a href='#'>العربية</a></li>
-                <li><a href='#'>Français</a></li>
-                <li><a href='#'>русский</a></li>
-                <li><a href='#'>中国人</a></li>
-                <li><a href='#'>Pilipino</a></li>
-                <li><a href='#'>Türkçe</a></li>
-                <li><a href='#'>Bahasa</a></li>
-                <li><a href='#'>বাংলা</a></li>
-                <li><a href='#'>हिंदी</a></li>
+                <ul className='languageDropdownContent'>
+                    <li><a href='#' onClick={() => changeLanguage('en')}>English</a></li>
+                    <li><a href='#' onClick={() => changeLanguage('ar')}>العربية</a></li>
+                    <li><a href='#' onClick={() => changeLanguage('fr')}>Français</a></li>
+                    <li><a href='#' onClick={() => changeLanguage('ru')}>Русский</a></li>
+                    <li><a href='#' onClick={() => changeLanguage('zh')}>中文</a></li>
+                    <li><a href='#' onClick={() => changeLanguage('tl')}>Filipino</a></li>
+                    <li><a href='#' onClick={() => changeLanguage('tr')}>Türkçe</a></li>
+                    <li><a href='#' onClick={() => changeLanguage('id')}>Bahasa Indonesia</a></li>
+                    <li><a href='#' onClick={() => changeLanguage('bn')}>বাংলা</a></li>
+                    <li><a href='#' onClick={() => changeLanguage('hi')}>हिंदी</a></li>
               </ul>
           </li>
         </div>
@@ -210,7 +222,7 @@ function Home() {
               <textarea
                 value={comment}
                 onChange={handleCommentChange}
-                placeholder="Enter your comment here..."
+                placeholder={t('Enter your comment here...')}
                 required
               />
               <button type="submit">إرسال</button>
