@@ -1,5 +1,6 @@
-// import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import './video.css';
+import Header from './header'
 
 
 function Videos(){

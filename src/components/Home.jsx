@@ -1,7 +1,7 @@
 import React, { useState, useEffect,  } from 'react';
 import './home.css';
 import { useTranslation } from 'react-i18next';
-import Logo from './imgs/logo.png';
+// import Logo from './imgs/logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   // faGlobe, 

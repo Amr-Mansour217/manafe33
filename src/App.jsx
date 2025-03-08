@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from './components/Home';
 import Videos from './components/video';
-import Quran from './components/header';
+// import Quran from './components/header';
 
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/videos" element={<Videos />} />
-        <Route path="/quran" element={<Quran />} />
+        {/* <Route path="/quran" element={<Quran />} /> */}
       </Routes>
     </Router>
   );

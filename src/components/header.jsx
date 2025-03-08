@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './header.css';
 import { useTranslation } from 'react-i18next';
+import { Link, useLocation } from 'react-router-dom';
 import Logo from './imgs/logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
@@ -9,46 +10,43 @@ import {
   } from '@fortawesome/free-solid-svg-icons';
 
 function Header() {
-          const { t, i18n } = useTranslation();
-          const [isLanguageOpen, setIsLanguageOpen] = useState(false);
-          const [activeNavItem, setActiveNavItem] = useState('/');
-          const languageRef = useRef(null);
-        
-          useEffect(() => {
-            const handleClickOutside = (event) => {
-              if (languageRef.current && !languageRef.current.contains(event.target)) {
-                setIsLanguageOpen(false);
-              }
-            };
-        
-            document.addEventListener('mousedown', handleClickOutside);
-            return () => {
-              document.removeEventListener('mousedown', handleClickOutside);
-            };
-          }, []);
-        
-          const toggleLanguageMenu = () => {
-            setIsLanguageOpen(!isLanguageOpen);
-          };
-        
-          const changeLanguage = (lng) => {
-            i18n.changeLanguage(lng);
-            localStorage.setItem('language', lng);
-            setIsLanguageOpen(false);
-          };
+  const { t, i18n } = useTranslation();
+  const [isLanguageOpen, setIsLanguageOpen] = useState(false);
+  const languageRef = useRef(null);
+  const location = useLocation();
 
-          const toggleActive = (path) => {
-            setActiveNavItem(path);
-        };
+  useEffect(() => {
+      const handleClickOutside = (event) => {
+          if (languageRef.current && !languageRef.current.contains(event.target)) {
+              setIsLanguageOpen(false);
+          }
+      };
+
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => {
+          document.removeEventListener('mousedown', handleClickOutside);
+      };
+  }, []);
+
+  const toggleLanguageMenu = () => {
+      setIsLanguageOpen(!isLanguageOpen);
+  };
+
+  const changeLanguage = (lng) => {
+      i18n.changeLanguage(lng);
+      localStorage.setItem('language', lng);
+      setIsLanguageOpen(false);
+  };
+
+  const navItems = [
+      { path: "/", text: "الرئيسية" },
+      { path: "/videos", text: "الفيديوهات" },
+      { path: "/quran", text: "القرءان المترجم" },
+      { path: "/library", text: "الملفات التفاعلية" },
+      { path: "/about", text: "تطبيقات إسلامية" },
+      { path: "/contact", text: "مواقع إسلامية أخرى" }
+  ];
     
-        const navItems = [
-            { path: "/", text: "الرئيسية" },
-            { path: "/videos", text: "الفيديوهات" },
-            { path: "/quran", text: "القرءان المترجم" },
-            { path: "/library", text: "الملفات التفاعلية" },
-            { path: "/about", text: "تطبيقات إسلامية" },
-            { path: "/contact", text: "مواقع إسلامية أخرى" }
-        ];
           
     return (
         <>
@@ -61,18 +59,14 @@ function Header() {
               </div>
               <nav className="main-nav">
               <ul className="nav-menu">
-                  {navItems.map((item) => (
+              {navItems.map((item) => (
                     <li key={item.path}>
-                      <a 
-                        href={item.path} 
-                        className={`nav-link ${activeNavItem === item.path ? 'active' : ''}`}
-                        onClick={(e) => {
-                            e.preventDefault();
-                            toggleActive(item.path);
-                        }}
+                      <Link
+                        to={item.path}
+                        className={`nav-link ${location.pathname === item.path ? 'active' : ''}`}
                       >
                         {t(item.text)}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
