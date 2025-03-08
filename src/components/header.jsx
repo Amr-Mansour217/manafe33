@@ -1,18 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './quran.css';
+import './header.css';
 import { useTranslation } from 'react-i18next';
 import Logo from './imgs/logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
-  faUser, 
-  faUserPlus, 
   faGlobe, 
   faChevronDown, 
   } from '@fortawesome/free-solid-svg-icons';
 
-function Quran(){
-    const { t, i18n } = useTranslation();
+function Header() {
+          const { t, i18n } = useTranslation();
           const [isLanguageOpen, setIsLanguageOpen] = useState(false);
+          const [activeNavItem, setActiveNavItem] = useState('/');
           const languageRef = useRef(null);
         
           useEffect(() => {
@@ -37,6 +36,20 @@ function Quran(){
             localStorage.setItem('language', lng);
             setIsLanguageOpen(false);
           };
+
+          const toggleActive = (path) => {
+            setActiveNavItem(path);
+        };
+    
+        const navItems = [
+            { path: "/", text: "الرئيسية" },
+            { path: "/videos", text: "الفيديوهات" },
+            { path: "/scholars", text: "القرءان المترجم" },
+            { path: "/library", text: "الملفات التفاعلية" },
+            { path: "/about", text: "تطبيقات إسلامية" },
+            { path: "/contact", text: "مواقع إسلامية أخرى" }
+        ];
+          
     return (
         <>
           <header>
@@ -44,29 +57,24 @@ function Quran(){
               <div className="top-nav">
                 <div className="logo-container">
                   <img src={Logo} alt="منافع" className="logo" />
-                  <div className="brand-name">
-                    <p>{t('منصة تعليمية إسلامية')}</p>
-                  </div>
-                </div>
-                <div className="auth-links">
-                  <a to="/login" className="auth-btn login-btn">
-                    <FontAwesomeIcon icon={faUser} />
-                    {t('تسجيل الدخول')}
-                  </a>
-                  <a to="/register" className="auth-btn register-btn">
-                    <FontAwesomeIcon icon={faUserPlus} />
-                    {t('إنشاء حساب')}
-                  </a>
                 </div>
               </div>
               <nav className="main-nav">
-                <ul className="nav-menu">
-                  <li><a href="/" className="nav-link active">{t('الرئيسية')}</a></li>
-                  <li><a href="/videos" className="nav-link">{t('الفيديوهات')}</a></li>
-                  <li><a href="/scholars" className="nav-link">{t('القرءان المترجم')}</a></li>
-                  <li><a href="/library" className="nav-link">{t('الملفات التفاعلية')}</a></li>
-                  <li><a href="/about" className="nav-link">{t('تطبيقات إسلامية')}</a></li>
-                  <li><a href="/contact" className="nav-link">{t('مواقع إسلامية أخرى')}</a></li>
+              <ul className="nav-menu">
+                  {navItems.map((item) => (
+                    <li key={item.path}>
+                      <a 
+                        href={item.path} 
+                        className={`nav-link ${activeNavItem === item.path ? 'active' : ''}`}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            toggleActive(item.path);
+                        }}
+                      >
+                        {t(item.text)}
+                      </a>
+                    </li>
+                  ))}
                 </ul>
                 <div className="language-dropdown" ref={languageRef}>
                   <button className="language-btn" onClick={toggleLanguageMenu}>
@@ -94,4 +102,4 @@ function Quran(){
     )
 }
 
-export default Quran;
+export default Header;

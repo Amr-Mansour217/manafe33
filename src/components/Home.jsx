@@ -1,50 +1,46 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect,  } from 'react';
 import './home.css';
 import { useTranslation } from 'react-i18next';
 import Logo from './imgs/logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
-  faUser, 
-  faUserPlus, 
-  faGlobe, 
-    faChevronDown, 
-    // faStar as fasStar, 
-    // faStar as farStar,
-    faClock, 
-    faEye, 
+  // faGlobe, 
+  //   faChevronDown, 
     faArrowLeft, 
     faCheckCircle 
   } from '@fortawesome/free-solid-svg-icons';
 import { IoStar } from "react-icons/io5";
+import Header from './header'
 
 const Home = () => {
 
-  const { t, i18n } = useTranslation();
-  const [isLanguageOpen, setIsLanguageOpen] = useState(false);
-  const languageRef = useRef(null);
+  const { t } = useTranslation();
+  // const { t, i18n } = useTranslation();
+  // const [isLanguageOpen, setIsLanguageOpen] = useState(false);
+  // const languageRef = useRef(null);
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (languageRef.current && !languageRef.current.contains(event.target)) {
-        setIsLanguageOpen(false);
-      }
-    };
+  // useEffect(() => {
+  //   const handleClickOutside = (event) => {
+  //     if (languageRef.current && !languageRef.current.contains(event.target)) {
+  //       setIsLanguageOpen(false);
+  //     }
+  //   };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+  //   document.addEventListener('mousedown', handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener('mousedown', handleClickOutside);
+  //   };
+  // }, []);
 
-  const toggleLanguageMenu = () => {
-    setIsLanguageOpen(!isLanguageOpen);
-  };
+  // const toggleLanguageMenu = () => {
+  //   setIsLanguageOpen(!isLanguageOpen);
+  // };
 
-  const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng);
-    localStorage.setItem('language', lng);
-    setIsLanguageOpen(false);
-  };
+  // const changeLanguage = (lng) => {
+  //   i18n.changeLanguage(lng);
+  //   localStorage.setItem('language', lng);
+  //   setIsLanguageOpen(false);
+  // };
 
   const videos = [
     {
@@ -116,7 +112,8 @@ const Home = () => {
 
   return (
     <>
-    <header>
+    <Header />
+    {/* <header>
       <div className="header-pattern"></div>
       <div className="top-nav">
         <div className="logo-container">
@@ -125,16 +122,7 @@ const Home = () => {
             <p>{t('منصة تعليمية إسلامية')}</p>
           </div>
         </div>
-        <div className="auth-links">
-          <a to="/login" className="auth-btn login-btn">
-            <FontAwesomeIcon icon={faUser} />
-            {t('تسجيل الدخول')}
-          </a>
-          <a to="/register" className="auth-btn register-btn">
-            <FontAwesomeIcon icon={faUserPlus} />
-            {t('إنشاء حساب')}
-          </a>
-        </div>
+        
       </div>
       <nav className="main-nav">
         <ul className="nav-menu">
@@ -166,8 +154,8 @@ const Home = () => {
           </div>
         </div>
       </nav>
-    </header>
-    <section className="hero">
+    </header> */}
+    <aside className="hero">
       <div className="hero-pattern"></div>
       <div className="hero-content">
         <h1>{t('منافع للعلوم الإسلامية')}</h1>
@@ -180,7 +168,7 @@ const Home = () => {
           <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" className="shape-fill"></path>
         </svg>
       </div>
-    </section>
+    </aside>
     <div className="videos-section">
       <div className="section-title">
         <h2>{t('أحدث الدروس')}</h2>
@@ -200,10 +188,6 @@ const Home = () => {
             <div className="video-info">
               <h3 className="video-title">{video.title}</h3>
               <p className="video-desc">{video.description}</p>
-              <div className="video-meta">
-                <span><FontAwesomeIcon icon={faClock} /> {video.duration}</span>
-                <span><FontAwesomeIcon icon={faEye} /> {video.views}</span>
-              </div>
             </div>
           </div>
         ))}
@@ -217,7 +201,7 @@ const Home = () => {
       </div>
     </div>
 
-    <section className="rating-section">
+    <main className="rating-section">
         <h2 className="rating-section-title">شاركنا رأيك</h2>
         <div className="stars-container">
           {[1, 2, 3, 4, 5].map((index) => (
@@ -239,7 +223,7 @@ const Home = () => {
           ></textarea>
           <button type="submit" className="submit-btn">إرسال التقييم</button>
         </form>
-      </section>
+      </main>
 
       {/* Modal مدمج داخل المكون */}
       {isModalOpen && (

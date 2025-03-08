@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from './components/home';
 import Videos from './components/video';
-import Quran from './components/quran';
+import Quran from './components/header';
 
 
 function App() {

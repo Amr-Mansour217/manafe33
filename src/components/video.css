@@ -1,4 +1,4 @@
-
+/* 
         :root {
             --main-blue: #1e3157;
             --dark-blue: #142541;
@@ -21,7 +21,6 @@
             color: var(--dark-blue);
         }
         
-        /* نافبار علوي */
         .top-header {
             display: flex;
             justify-content: space-between;
@@ -61,7 +60,6 @@
             opacity: 0.8;
         }
         
-        /* القائمة الرئيسية */
         .main-nav {
             background-color: var(--main-blue);
             border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -101,10 +99,10 @@
         
         .main-nav .language-selector i {
             margin-left: 5px;
-        }
+        } */
         
         /* صفحة الفيديوهات */
-        .videos-header {
+        /* .videos-header {
             background-color: var(--main-blue);
             padding: 30px 20px;
             text-align: center;
@@ -121,9 +119,9 @@
             margin: 0 auto;
             line-height: 1.6;
         }
-        
+         */
         /* أقسام الفيديوهات */
-        .video-categories {
+        /* .video-categories {
             background-color: var(--light-bg);
             padding: 15px 0;
             border-bottom: 1px solid #ddd;
@@ -158,9 +156,9 @@
             background-color: var(--gold);
             color: var(--white);
         }
-        
+         */
         /* قسم الفيديوهات */
-        .videos-section {
+        /* .videos-section {
             padding: 40px 20px;
         }
         
@@ -195,10 +193,10 @@
         
         .section-title h2::after {
             left: 0;
-        }
+        } */
         
         /* شبكة الفيديوهات */
-        .videos-grid {
+        /* .videos-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 25px;
@@ -295,9 +293,9 @@
             margin-left: 5px;
             color: var(--gold);
         }
-        
+         */
         /* نافيجيشن الصفحات */
-        .pagination {
+        /* .pagination {
             display: flex;
             justify-content: center;
             margin-top: 40px;
@@ -330,10 +328,10 @@
         .pagination a.active {
             background-color: var(--main-blue);
             color: var(--white);
-        }
+        } */
         
         /* فوتر */
-        .footer {
+        /* .footer {
             background-color: var(--main-blue);
             color: var(--white);
             padding: 40px 20px 20px;
@@ -398,9 +396,9 @@
             font-size: 14px;
             color: var(--gray);
         }
-        
+         */
         /* تجاوب الموقع */
-        @media (max-width: 768px) {
+        /* @media (max-width: 768px) {
             .top-header {
                 flex-direction: column;
                 gap: 10px;
@@ -437,4 +435,4 @@
             .videos-grid {
                 grid-template-columns: 1fr;
             }
-        }
+        } */
