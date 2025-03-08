@@ -113,48 +113,6 @@ const Home = () => {
   return (
     <>
     <Header />
-    {/* <header>
-      <div className="header-pattern"></div>
-      <div className="top-nav">
-        <div className="logo-container">
-          <img src={Logo} alt="منافع" className="logo" />
-          <div className="brand-name">
-            <p>{t('منصة تعليمية إسلامية')}</p>
-          </div>
-        </div>
-        
-      </div>
-      <nav className="main-nav">
-        <ul className="nav-menu">
-          <li><a href="/" className="nav-link active">{t('الرئيسية')}</a></li>
-          <li><a href="/videos" className="nav-link">{t('الفيديوهات')}</a></li>
-          <li><a href="/quran" className="nav-link">{t('القرءان المترجم')}</a></li>
-          <li><a href="/library" className="nav-link">{t('الملفات التفاعلية')}</a></li>
-          <li><a href="/about" className="nav-link">{t('تطبيقات إسلامية')}</a></li>
-          <li><a href="/contact" className="nav-link">{t('مواقع إسلامية أخرى')}</a></li>
-        </ul>
-        <div className="language-dropdown" ref={languageRef}>
-          <button className="language-btn" onClick={toggleLanguageMenu}>
-            <FontAwesomeIcon icon={faGlobe} />
-            {t('العربية')}
-            <FontAwesomeIcon icon={faChevronDown} />
-          </button>
-          <div className={`language-content ${isLanguageOpen ? 'show' : ''}`}>
-            <a href="#" onClick={() => changeLanguage('ar')}>العربية</a>
-            <a href="#" onClick={() => changeLanguage('en')}>English</a>
-            <a href="#" onClick={() => changeLanguage('fr')}>Français</a>
-            <a href="#" onClick={() => changeLanguage('tr')}>Türkçe</a>
-            <a href="#" onClick={() => changeLanguage('id')}>Bahasa</a>
-            <a href="#" onClick={() => changeLanguage('ru')}>русский</a>
-            <a href="#" onClick={() => changeLanguage('hi')}>हिंदी</a>
-            <a href="#" onClick={() => changeLanguage('ur')}>اردو</a>
-            <a href="#" onClick={() => changeLanguage('bn')}>বাংলা</a>
-            <a href="#" onClick={() => changeLanguage('zh')}>中国人</a>
-            <a href="#" onClick={() => changeLanguage('fil')}>Pilipino</a>
-          </div>
-        </div>
-      </nav>
-    </header> */}
     <aside className="hero">
       <div className="hero-pattern"></div>
       <div className="hero-content">

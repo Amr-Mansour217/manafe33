@@ -44,7 +44,7 @@ function Header() {
         const navItems = [
             { path: "/", text: "الرئيسية" },
             { path: "/videos", text: "الفيديوهات" },
-            { path: "/scholars", text: "القرءان المترجم" },
+            { path: "/quran", text: "القرءان المترجم" },
             { path: "/library", text: "الملفات التفاعلية" },
             { path: "/about", text: "تطبيقات إسلامية" },
             { path: "/contact", text: "مواقع إسلامية أخرى" }
