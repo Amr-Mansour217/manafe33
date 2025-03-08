@@ -1,245 +1,272 @@
-import React, { useState, useEffect, useRef, useCallback  } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './home.css';
 import { useTranslation } from 'react-i18next';
-import { CSSTransition } from 'react-transition-group';
-import { useSwipeable } from 'react-swipeable';
-import { FaRegUser, FaPhone, FaStar, FaTimes } from "react-icons/fa";
-import { TbUserPlus, TbUser } from "react-icons/tb";
+import Logo from './imgs/logo.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+  faUser, 
+  faUserPlus, 
+  faGlobe, 
+    faChevronDown, 
+    // faStar as fasStar, 
+    // faStar as farStar,
+    faClock, 
+    faEye, 
+    faArrowLeft, 
+    faCheckCircle 
+  } from '@fortawesome/free-solid-svg-icons';
+import { IoStar } from "react-icons/io5";
 
-function Home() {
+const Home = () => {
 
   const { t, i18n } = useTranslation();
+  const [isLanguageOpen, setIsLanguageOpen] = useState(false);
+  const languageRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (languageRef.current && !languageRef.current.contains(event.target)) {
+        setIsLanguageOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const toggleLanguageMenu = () => {
+    setIsLanguageOpen(!isLanguageOpen);
+  };
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
-    const rtlLanguages = ['ar', 'fa', 'he', 'ur'];
-    document.documentElement.dir = rtlLanguages.includes(lng) ? 'rtl' : 'ltr';
-    document.documentElement.lang = lng;
+    localStorage.setItem('language', lng);
+    setIsLanguageOpen(false);
   };
 
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [key, setKey] = useState(0);
-  const dropdownRef = useRef(null);
-  const buttonRef = useRef(null);
-  const timerRef = useRef(null);
+  const videos = [
+    {
+      id: 1,
+      title: 'أصول الفقه للمبتدئين',
+      description: 'شرح مبسط لأصول الفقه الإسلامي للمبتدئين مع الأمثلة التطبيقية',
+      duration: '45 دقيقة',
+      views: '1.2K'
+    },
+    {
+      id: 2,
+      title: 'علوم القرآن',
+      description: 'مقدمة في علوم القرآن الكريم وأساليب التفسير المختلفة',
+      duration: '60 دقيقة',
+      views: '2.5K'
+    },
+    {
+      id: 3,
+      title: 'السيرة النبوية',
+      description: 'دروس مستفادة من سيرة النبي محمد صلى الله عليه وسلم',
+      duration: '50 دقيقة',
+      views: '3.7K'
+    },
+  ];
 
-  const toggleDropdown = () => {
-    setIsDropdownVisible(!isDropdownVisible);
-  };
 
-  const resetTimer = useCallback(() => {
-    if (timerRef.current) {
-      clearInterval(timerRef.current);
-    }
-    timerRef.current = setInterval(() => {
-      setCurrentSlide((prevSlide) => (prevSlide + 1) % 2);
-      setKey((prevKey) => prevKey + 1);
-    }, 5000);
-  }, []);
-
-  const changeSlide = useCallback((index) => {
-    setCurrentSlide(index);
-    setKey((prevKey) => prevKey + 1);
-    resetTimer();
-  }, [resetTimer]);
-
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target) &&
-          buttonRef.current && !buttonRef.current.contains(event.target)) {
-        setIsDropdownVisible(false);
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
-  useEffect(() => {
-    resetTimer();
-    return () => {
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-      }
-    };
-  }, [resetTimer]);
-
-  const handlers = useSwipeable({
-    onSwipedLeft: () => changeSlide((currentSlide + 1) % 2),
-    onSwipedRight: () => changeSlide((currentSlide - 1 + 2) % 2),
-    preventDefaultTouchmoveEvent: true,
-    trackMouse: true
-  });
 
   const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState('');
-  const [showModal, setShowModal] = useState(false);
+  const [hoverRating, setHoverRating] = useState(0);
+  const [feedback, setFeedback] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleRatingChange = (value) => {
-    setRating(value);
+  useEffect(() => {
+    if (isModalOpen) {
+      // إغلاق تلقائي بعد 3 ثواني
+      const timer = setTimeout(() => {
+        setIsModalOpen(false);
+      }, 3000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [isModalOpen]);
+
+  const handleStarClick = (index) => {
+    setRating(index);
   };
 
-  const handleCommentChange = (e) => {
-    setComment(e.target.value);
+  const handleStarHover = (index) => {
+    setHoverRating(index);
+  };
+
+  const handleStarLeave = () => {
+    setHoverRating(0);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (rating > 0 && comment.trim() !== '') {
-      console.log('Sending to backend:', { rating, comment });
-      setRating(0);
-      setComment('');
-      setShowModal(true);
-      document.body.classList.add('modal-open'); // أضف هذا السطر
-    }
+    // هنا يمكن إضافة كود لإرسال التقييم إلى الخادم
+    setIsModalOpen(true);
+    // إعادة تعيين النموذج بعد الإرسال
+    setRating(0);
+    setFeedback('');
   };
-  
+
   const closeModal = () => {
-    setShowModal(false);
-    document.body.classList.remove('modal-open'); // أضف هذا السطر
+    setIsModalOpen(false);
   };
-  useEffect(() => {
-    return () => {
-      document.body.classList.remove('modal-open');
-    };
-  }, []);
+
 
   return (
     <>
-      <div className='container'>
-        <nav>
-          <ul>
-            <li>
-              <button 
-                ref={buttonRef}
-                onClick={toggleDropdown}
-                className={isDropdownVisible ? 'active' : ''}
-              >
-                <FaRegUser className='icon'/>
-              </button>
-            </li>
-            <li><button><FaPhone className='icon'/></button></li>
-          </ul>
-        </nav>
-        <div ref={dropdownRef} className={`dropdown ${isDropdownVisible ? 'visible' : ''}`}>
-          <div className="dropdown-content">
-            <ul>
-            <li><a href="#"><div>
-                    <TbUser className='dropDownIcon' />
-                  </div>
-                  <p>Sign In</p>
-                </a>
-              </li>
-              <li><a href="#"><div>
-              <TbUserPlus className='dropDownIcon' />
-                </div>
-                <p>Create Account</p>
-                </a>
-              </li>
-            </ul>
+    <header>
+      <div className="header-pattern"></div>
+      <div className="top-nav">
+        <div className="logo-container">
+          <img src={Logo} alt="منافع" className="logo" />
+          <div className="brand-name">
+            <p>{t('منصة تعليمية إسلامية')}</p>
           </div>
         </div>
-        <div className="secondNav">
-          <ul>
-            <li><a href='#'>{t('Home')}</a></li>
-            <li><a href='#'>{t('Videos')}</a></li>
-            <li><a href='#'>{t('Translations of Quran')}</a></li>
-            <li><a href='#'>{t('Interactive files')}</a></li>
-            <li><a href='#'>{t('Islamic applications')}</a></li>
-            <li><a href='#'>{t('Another Islamic sites')}</a></li>
-          </ul>
-          <li className="languageDropdown">
-            <a>{t('English')}</a>
-            <ul className='languageDropdownContent'>
-              <li><a href='#' onClick={() => changeLanguage('en')}>English</a></li>
-              <li><a href='#' onClick={() => changeLanguage('ar')}>العربية</a></li>
-              <li><a href='#' onClick={() => changeLanguage('fr')}>Français</a></li>
-              <li><a href='#' onClick={() => changeLanguage('ru')}>Русский</a></li>
-              <li><a href='#' onClick={() => changeLanguage('zh')}>中文</a></li>
-              <li><a href='#' onClick={() => changeLanguage('tl')}>Filipino</a></li>
-              <li><a href='#' onClick={() => changeLanguage('tr')}>Türkçe</a></li>
-              <li><a href='#' onClick={() => changeLanguage('id')}>Bahasa Indonesia</a></li>
-              <li><a href='#' onClick={() => changeLanguage('bn')}>বাংলা</a></li>
-              <li><a href='#' onClick={() => changeLanguage('hi')}>हिंदी</a></li>
-            </ul>
-          </li>
-        </div>
-        <header></header>
-        <section>
-        <div className="slider-container" {...handlers}>
-        <CSSTransition
-          key={key}
-          in={true}
-          timeout={400}
-          classNames="slide-right"
-        >
-          <div className={`slide ${currentSlide === 0 ? 'active' : ''}`}></div>
-        </CSSTransition>
-        <CSSTransition
-          key={key + 1}
-          in={true}
-          timeout={400}
-          classNames="slide-right"
-        >
-          <div className={`slide ${currentSlide === 1 ? 'active' : ''}`}></div>
-        </CSSTransition>
-        <div className="slider-dots">
-          <span 
-            className={`dot ${currentSlide === 0 ? 'active' : ''}`} 
-            onClick={() => changeSlide(0)}
-          ></span>
-          <span 
-            className={`dot ${currentSlide === 1 ? 'active' : ''}`} 
-            onClick={() => changeSlide(1)}
-          ></span>
+        <div className="auth-links">
+          <a to="/login" className="auth-btn login-btn">
+            <FontAwesomeIcon icon={faUser} />
+            {t('تسجيل الدخول')}
+          </a>
+          <a to="/register" className="auth-btn register-btn">
+            <FontAwesomeIcon icon={faUserPlus} />
+            {t('إنشاء حساب')}
+          </a>
         </div>
       </div>
-        </section>
-        <main>
-          <div className='youtubeVids'>
-          <iframe src={t('videoLinks.video1')} title="YouTube video player" allowFullScreen></iframe>
-          <iframe src={t('videoLinks.video2')} title="YouTube video player" allowFullScreen></iframe>
-          <iframe src={t('videoLinks.video3')} title="YouTube video player" allowFullScreen></iframe>
+      <nav className="main-nav">
+        <ul className="nav-menu">
+          <li><a href="/" className="nav-link active">{t('الرئيسية')}</a></li>
+          <li><a href="/videos" className="nav-link">{t('الفيديوهات')}</a></li>
+          <li><a href="/quran" className="nav-link">{t('القرءان المترجم')}</a></li>
+          <li><a href="/library" className="nav-link">{t('الملفات التفاعلية')}</a></li>
+          <li><a href="/about" className="nav-link">{t('تطبيقات إسلامية')}</a></li>
+          <li><a href="/contact" className="nav-link">{t('مواقع إسلامية أخرى')}</a></li>
+        </ul>
+        <div className="language-dropdown" ref={languageRef}>
+          <button className="language-btn" onClick={toggleLanguageMenu}>
+            <FontAwesomeIcon icon={faGlobe} />
+            {t('العربية')}
+            <FontAwesomeIcon icon={faChevronDown} />
+          </button>
+          <div className={`language-content ${isLanguageOpen ? 'show' : ''}`}>
+            <a href="#" onClick={() => changeLanguage('ar')}>العربية</a>
+            <a href="#" onClick={() => changeLanguage('en')}>English</a>
+            <a href="#" onClick={() => changeLanguage('fr')}>Français</a>
+            <a href="#" onClick={() => changeLanguage('tr')}>Türkçe</a>
+            <a href="#" onClick={() => changeLanguage('id')}>Bahasa</a>
+            <a href="#" onClick={() => changeLanguage('ru')}>русский</a>
+            <a href="#" onClick={() => changeLanguage('hi')}>हिंदी</a>
+            <a href="#" onClick={() => changeLanguage('ur')}>اردو</a>
+            <a href="#" onClick={() => changeLanguage('bn')}>বাংলা</a>
+            <a href="#" onClick={() => changeLanguage('zh')}>中国人</a>
+            <a href="#" onClick={() => changeLanguage('fil')}>Pilipino</a>
           </div>
-          <a href='#'>{t('View more')}</a>
-        </main>
-        <footer>
-          <div className="rating-system">
-            <h2>{t('Rate your experience')}</h2>
-            <form onSubmit={handleSubmit}>
-              <div className="star-rating">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <FaStar
-                    key={star}
-                    className={star <= rating ? 'star active' : 'star'}
-                    onClick={() => handleRatingChange(star)}
-                  />
-                ))}
+        </div>
+      </nav>
+    </header>
+    <section className="hero">
+      <div className="hero-pattern"></div>
+      <div className="hero-content">
+        <h1>{t('منافع للعلوم الإسلامية')}</h1>
+        <p>
+          {t('منصة تعليمية إسلامية متكاملة تقدم دروساً ومحاضرات في العلوم الشرعية والتربوية بأسلوب عصري مُيسّر')}
+        </p>
+      </div>
+      <div className="hero-shape">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" className="shape-fill"></path>
+        </svg>
+      </div>
+    </section>
+    <div className="videos-section">
+      <div className="section-title">
+        <h2>{t('أحدث الدروس')}</h2>
+        <div className="ornament">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+      
+      <div className="videos-grid">
+        {videos.map(video => (
+          <div className="video-card" key={video.id}>
+            <div className="video-thumbnail">
+              <div className="play-icon"></div>
+            </div>
+            <div className="video-info">
+              <h3 className="video-title">{video.title}</h3>
+              <p className="video-desc">{video.description}</p>
+              <div className="video-meta">
+                <span><FontAwesomeIcon icon={faClock} /> {video.duration}</span>
+                <span><FontAwesomeIcon icon={faEye} /> {video.views}</span>
               </div>
-              <textarea
-                value={comment}
-                onChange={handleCommentChange}
-                placeholder={t('Enter your comment here...')}
-                required
-              />
-              <button type="submit">{t('Send')}</button>
-            </form>
+            </div>
           </div>
-        </footer>
-        {showModal && (
-        <div className="modal">
-          <div className="modal-content">
-            <FaTimes className="close-icon" onClick={closeModal} />
-            <p>تم إرسال تعليقك بنجاح</p>
+        ))}
+      </div>
+      
+      <div className="more-btn-container">
+        <a href="#more-videos" className="more-btn">
+          عرض المزيد من الدروس
+          <FontAwesomeIcon icon={faArrowLeft} />
+        </a>
+      </div>
+    </div>
+
+    <section className="rating-section">
+        <h2 className="rating-section-title">شاركنا رأيك</h2>
+        <div className="stars-container">
+          {[1, 2, 3, 4, 5].map((index) => (
+            <IoStar
+              key={index}
+              icon={(hoverRating || rating) >= index  }
+              className={`star ${(hoverRating || rating) >= index ? 'active' : ''}`}
+              onClick={() => handleStarClick(index)}
+              onMouseEnter={() => handleStarHover(index)}
+              onMouseLeave={handleStarLeave}
+            />
+          ))}
+        </div>
+        <form className="feedback-form" onSubmit={handleSubmit}>
+          <textarea
+            placeholder="اكتب تعليقك هنا..."
+            value={feedback}
+            onChange={(e) => setFeedback(e.target.value)}
+          ></textarea>
+          <button type="submit" className="submit-btn">إرسال التقييم</button>
+        </form>
+      </section>
+
+      {/* Modal مدمج داخل المكون */}
+      {isModalOpen && (
+        <div className="modal-overlay">
+          <div className="success-modal">
+            <div className="success-icon">
+                <FontAwesomeIcon icon={faCheckCircle} />
+            </div>
+            <h3 className="modal-title">تم بنجاح!</h3>
+            <p className="modal-message">تم إرسال تقييمك بنجاح، شكراً لك!</p>
+            <button className="modal-close-btn" onClick={closeModal}>
+              إغلاق
+            </button>
           </div>
         </div>
-        )}
+      )}
+    <footer>
+      <div className="footer-content">
+        <div className="footer-bottom">
+          <div className="copyright">
+            &copy; {new Date().getFullYear()} منصة منافع - جميع الحقوق محفوظة
+          </div>
+        </div>
       </div>
+    </footer>
     </>
   );
-}
+};
 
-export default Home
+export default Home;
