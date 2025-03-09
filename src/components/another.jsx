@@ -5,7 +5,8 @@ import webimage from "./imgs/webimage.jpg";
 import Footer from './footer';
 
 function Another() {
-  // قائمة بالمواقع (يمكنك إضافة المزيد حسب الحاجة)
+    
+    // قائمة بالمواقع (يمكنك إضافة المزيد حسب الحاجة)
   const websites = [
     { id: 1, name: "موقع ابن جبرين", url: "https://www.ibn-jebreen.com/", image: webimage },
     { id: 2, name: "موقع آخر", url: "https://www.ibn-jebreen.com/", image: webimage },
@@ -16,6 +17,11 @@ function Another() {
   return (
     <div className="page-container">
       <Header/>
+      <div class="videos-header">
+    <h1>مكتبة الفيديوهات الإسلامية</h1>
+    <p>مجموعة مميزة من المحاضرات والدروس في علوم الشريعة والسيرة النبوية</p>
+    </div>
+    
       <div className="content-wrap">
         <div className="another-container">
           <div className="another-categories">

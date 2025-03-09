@@ -29,6 +29,11 @@ function Intre() {
   return (
     <>
     <Header />
+    <div class="intre-header">
+            <h1>مكتبة الفيديوهات الإسلامية</h1>
+            <p>مجموعة مميزة من المحاضرات والدروس في علوم الشريعة والسيرة النبوية</p>
+            </div>
+
     <div className="interactive-files-container">
       {books.map((book) => (
         <div key={book.id} className="book-card">

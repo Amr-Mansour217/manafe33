@@ -104,7 +104,23 @@
   .content-wrap {
     flex: 1;
   }
-  
+
+  .another-header {
+    background-color: var(--third-color);
+    padding: 30px 20px;
+    text-align: center;
+    color: var(--white);
+}
+
+.another-header h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.another-header p {
+    margin: 0 auto;
+    line-height: 1.6;
+}
   /* تصغير الصور بنسبة 35% للكمبيوتر */
   /* تصغير الصور بنسبة 35% للكمبيوتر وتنزيلها لتحت بنسبة 15% */
   @media (min-width: 1024px) {
