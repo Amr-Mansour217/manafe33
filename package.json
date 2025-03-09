@@ -1,6 +1,6 @@
 {
-  "homepage": "https://Amr-Mansour217.github.io/repository-name",
-  "name": "manafe3",
+  "homepage": "https://Amr-Mansour217.github.io/manafe33",
+  "name": "manafe33",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -8,8 +8,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-  "predeploy": "npm run build",
-  "deploy": "gh-pages -d build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "preview": "vite preview"
   },
   "dependencies": {
