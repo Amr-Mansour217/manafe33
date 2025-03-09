@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from './header';
 import './another.css';
-import Webimage from "./imgs/webimage.jpg";
+import Webimage from "./imgs/webimage.jpeg";
 import Footer from './footer';
 
 function Another() {
@@ -24,18 +24,6 @@ function Another() {
     
       <div className="content-wrap">
         <div className="another-container">
-          <div className="another-categories">
-            <ul>
-              <li><a href="#" className="active">جميع المواقع</a></li>
-              <li><a href="#">العقيدة</a></li>
-              <li><a href="#">الفقه</a></li>
-              <li><a href="#">تفسير القرآن</a></li>
-              <li><a href="#">السيرة النبوية</a></li>
-              <li><a href="#">الحديث</a></li>
-              <li><a href="#">الأخلاق</a></li>
-              <li><a href="#">العلوم التربوية</a></li>
-            </ul>
-          </div>
 
           <div className="websites-grid">
             {websites.map(site => (

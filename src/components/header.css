@@ -27,20 +27,21 @@ header {
   @keyframes scrolling-text {
     from { transform: translateX(100%); }
     to { transform: translateX(-100%); }
-}
-.scrolling {
+  }
+  .scrolling {
   position: absolute;
   right: 0;
-    width: 100vw;
-    width: 100%;
-    white-space: nowrap;
-    display: inline-block;
-    animation: scrolling-text 10s linear infinite;
-    color: white;
+  width: 100vw;
+  width: 100%;
+  white-space: nowrap;
+  display: inline-block;
+  animation: scrolling-text 20s linear infinite;
+  color: white;
 }
-  .logo {
-    width: 100px;
-    background-color: var(--primary-color);
+.logo {
+  width: 100px;
+  background-color: var(--primary-color);
+    z-index: 4;
   }
   .brand-name h1 {
     font-family: 'Amiri', serif;

@@ -54,7 +54,7 @@ function Header() {
               <div className="header-pattern"></div>
               <div className="top-nav">
                 <div className="logo-container">
-                  <div className='scrolling'>ykjfkuyyuyygyggy</div>
+                  <div className='scrolling'>بِسْمِ اللَّـهِ الرَّحْمَـٰنِ الرَّحِيمِ</div>
                   <img src={Logo} alt="منافع" className="logo" />
                 </div>
               </div>
