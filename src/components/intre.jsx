@@ -1,0 +1,40 @@
+import React from 'react'
+import { Link } from 'react-router-dom'
+import './intractivefiles.css' // تأكد من إنشاء هذا الملف CSS
+import Header from "./header";
+function Intre() {
+
+  
+  // يمكنك إضافة المزيد من الكتب هنا
+  
+  const books = [
+    {
+      id: 1,
+      title: "القرآن الكريم",
+      image: "/path/to/quran-image.jpg",
+      description: "النص الكامل للقرآن الكريم مع التفسير",
+      link: "/quran"
+    },
+    // يمكنك إضافة المزيد من الكتب هنا
+  ]
+  
+  return (
+    <>
+    <Header />
+    <div className="interactive-files-container">
+      {books.map((book) => (
+        <div key={book.id} className="book-card">
+          <img src={book.image} alt={book.title} className="book-image" />
+          <div className="book-info">
+            <h3 className="book-title">{book.title}</h3>
+            <p className="book-description">{book.description}</p>
+            <a href="/bigarabicquran" target='_blank' className="view-book-btn" >رؤية الكتاب</a>
+          </div>
+        </div>
+      ))}
+    </div>
+    </>
+  )
+}
+
+export default Intre
