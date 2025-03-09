@@ -1,7 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import './intractivefiles.css' // تأكد من إنشاء هذا الملف CSS
 import Header from "./header";
+import Footer from './footer';
 function Intre() {
 
   
@@ -10,6 +11,13 @@ function Intre() {
   const books = [
     {
       id: 1,
+      title: "القرآن الكريم",
+      image: "/path/to/quran-image.jpg",
+      description: "النص الكامل للقرآن الكريم مع التفسير",
+      link: "/quran"
+    },
+    {
+      id: 2,
       title: "القرآن الكريم",
       image: "/path/to/quran-image.jpg",
       description: "النص الكامل للقرآن الكريم مع التفسير",
@@ -33,6 +41,22 @@ function Intre() {
         </div>
       ))}
     </div>
+    <div className="videos-grid">
+      {books.map(book => (
+        <div key={book.id} className="video-card pdf-card">
+            <div className="video-thumbnail">
+              <img src={book.link} alt={book.title} allowFullScreen ></img>
+            </div>
+            <div className="video-info">
+              <h3 className="video-title">{book.title}</h3>
+              <p className="video-description">{book.description}</p>
+              <div className="video-meta">
+              </div>
+            </div>
+          </div>
+        ))}
+    </div>
+    <Footer/>
     </>
   )
 }

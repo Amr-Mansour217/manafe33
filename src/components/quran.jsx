@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from "./header";
-import Book from "./translation.pdf";
+import ArQuran from "./pdfs/ar-quran.pdf";
 import './quran.css'; // تأكد من إنشاء هذا الملف
 
 function Quran() {
@@ -9,7 +9,7 @@ function Quran() {
       <Header />
       <div className="container">
         <embed 
-          src={Book} 
+          src={ArQuran} 
           type="application/pdf" 
           width="100%" 
           height="100%" 

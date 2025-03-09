@@ -1,9 +1,34 @@
 import React from 'react';
 import './video.css';
 import Header from './header'
+import Footer from './footer'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+
 
 
 function Videos(){
+    const videos = [
+        {
+            id: 1,
+            title: 'أساسيات العقيدة الإسلامية',
+            description: 'شرح لأهم أصول العقيدة الإسلامية للمبتدئين ومجمل أركان الإيمان',
+            link: 'https://www.youtube.com/embed/FsDrBKQy7gM?si=h414kkga6ycM4r5o'
+        },
+        {
+            id: 2,
+            title: 'أساسيات العقيدة الإسلامية',
+            description: 'شرح لأهم أصول العقيدة الإسلامية للمبتدئين ومجمل أركان الإيمان',
+            link: 'https://www.youtube.com/embed/ZINjuzYQxX4?si=LIMh4FGyhj_5goO6'
+        },
+        {
+            id: 3,
+            title: 'أساسيات العقيدة الإسلامية',
+            description: 'شرح لأهم أصول العقيدة الإسلامية للمبتدئين ومجمل أركان الإيمان',
+            link: 'https://www.youtube.com/embed/tjp7wiUaPZk?si=QTrBLZ8nzMYXSliB'
+        },
+    ]
+
     return (
         <>
             <Header/>
@@ -30,122 +55,35 @@ function Videos(){
             <h2>فيديوهات مختارة</h2>
         </div>
 
-        <div class="videos-grid">
-            <div class="video-card">
-                <div class="video-thumbnail">
-                    <img src="https://placehold.co/600x400/1e3157/ffffff?text=أساسيات+العقيدة" alt="أساسيات العقيدة الإسلامية"/>
-                    <div class="play-button">
-                        <i class="fas fa-play"></i>
-                    </div>
+        <div className="videos-grid">
+                    {videos.map(video => (
+                        <div key={video.id} className="video-card">
+                            <div className="video-thumbnail">
+                                <iframe src={video.link} alt={video.title} allowFullScreen ></iframe>
+                            </div>
+                            <div className="video-info">
+                                <h3 className="video-title">{video.title}</h3>
+                                <p className="video-description">{video.description}</p>
+                                <div className="video-meta">
+                                </div>
+                            </div>
+                        </div>
+                    ))}
                 </div>
-                <div class="video-info">
-                    <h3 class="video-title">أساسيات العقيدة الإسلامية</h3>
-                    <p class="video-description">شرح لأهم أصول العقيدة الإسلامية للمبتدئين ومجمل أركان الإيمان</p>
-                    <div class="video-meta">
-                        <span><i class="fas fa-eye"></i> 1.7K</span>
-                        <span><i class="fas fa-clock"></i> 45 دقيقة</span>
-                    </div>
-                </div>
-            </div>
 
-            <div class="video-card">
-                <div class="video-thumbnail">
-                    <img src="https://placehold.co/600x400/1e3157/ffffff?text=تفسير+الفاتحة" alt="تفسير سورة الفاتحة"/>
-                    <div class="play-button">
-                        <i class="fas fa-play"></i>
-                    </div>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">تفسير سورة الفاتحة</h3>
-                    <p class="video-description">شرح تفصيلي لمعاني سورة الفاتحة ومقاصدها وفوائدها التعبدية</p>
-                    <div class="video-meta">
-                        <span><i class="fas fa-eye"></i> 3.5K</span>
-                        <span><i class="fas fa-clock"></i> 30 دقيقة</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail">
-                    <img src="https://placehold.co/600x400/1e3157/ffffff?text=أحكام+الصلاة" alt="أحكام الصلاة"/>
-                    <div class="play-button">
-                        <i class="fas fa-play"></i>
-                    </div>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">أحكام الصلاة</h3>
-                    <p class="video-description">شرح عملي لأحكام الصلاة وكيفيتها والأخطاء الشائعة فيها</p>
-                    <div class="video-meta">
-                        <span><i class="fas fa-eye"></i> 2.4K</span>
-                        <span><i class="fas fa-clock"></i> 40 دقيقة</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail">
-                    <img src="https://placehold.co/600x400/1e3157/ffffff?text=الأخلاق+الإسلامية" alt="الأخلاق الإسلامية"/>
-                    <div class="play-button">
-                        <i class="fas fa-play"></i>
-                    </div>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">الأخلاق الإسلامية</h3>
-                    <p class="video-description">محاضرة عن منظومة الأخلاق في الإسلام وأهميتها وتطبيقاتها</p>
-                    <div class="video-meta">
-                        <span><i class="fas fa-eye"></i> 1.8K</span>
-                        <span><i class="fas fa-clock"></i> 35 دقيقة</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail">
-                    <img src="https://placehold.co/600x400/1e3157/ffffff?text=أحكام+الصيام" alt="أحكام الصيام"/>
-                    <div class="play-button">
-                        <i class="fas fa-play"></i>
-                    </div>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">أحكام الصيام</h3>
-                    <p class="video-description">شرح مفصل لأحكام الصيام ومستحباته في الإسلام</p>
-                    <div class="video-meta">
-                        <span><i class="fas fa-eye"></i> 2.1K</span>
-                        <span><i class="fas fa-clock"></i> 25 دقيقة</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail">
-                    <img src="https://placehold.co/600x400/1e3157/ffffff?text=السيرة+النبوية" alt="السيرة النبوية"/>
-                    <div class="play-button">
-                        <i class="fas fa-play"></i>
-                    </div>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">السيرة النبوية</h3>
-                    <p class="video-description">دروس من حياة النبي صلى الله عليه وسلم وعبرها في حياتنا</p>
-                    <div class="video-meta">
-                        <span><i class="fas fa-eye"></i> 4.3K</span>
-                        <span><i class="fas fa-clock"></i> 50 دقيقة</span>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="pagination">
             <ul>
-                <li><a href="#"><i class="fas fa-chevron-right"></i></a></li>
+                <li><a href="#"><FontAwesomeIcon icon={faChevronRight} /></a></li>
                 <li><a href="#" class="active">1</a></li>
                 <li><a href="#">2</a></li>
                 <li><a href="#">3</a></li>
                 <li><a href="#">4</a></li>
-                <li><a href="#"><i class="fas fa-chevron-left"></i></a></li>
+                <li><a href="#"><FontAwesomeIcon icon={faChevronLeft} /></a></li>
             </ul>
         </div>
     </section>
-
+    <Footer />
         </>
     )
 }

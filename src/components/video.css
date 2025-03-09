@@ -1,7 +1,7 @@
-/* 
         :root {
             --main-blue: #1e3157;
             --dark-blue: #142541;
+            --third-color: #233d60;
             --gold: #D4AC0C;
             --dark-gold: #9c730c;
             --white: #ffffff;
@@ -16,94 +16,12 @@
         }
         
         body {
-            font-family: 'Cairo', sans-serif;
+            /* font-family: 'Cairo', sans-serif; */
             background-color: var(--light-bg);
             color: var(--dark-blue);
         }
-        
-        .top-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: var(--main-blue);
-            padding: 15px 20px;
-        }
-        
-        .top-header .auth-buttons {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .top-header .auth-button {
-            background-color: var(--white);
-            color: var(--main-blue);
-            border: none;
-            border-radius: 20px;
-            padding: 5px 15px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .top-header .logo {
-            color: var(--white);
-            font-size: 18px;
-            font-weight: bold;
-        }
-        
-        .top-header .date {
-            color: var(--white);
-            font-size: 14px;
-            opacity: 0.8;
-        }
-        
-        .main-nav {
-            background-color: var(--main-blue);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            justify-content: space-between;
-            padding: 0 20px;
-        }
-        
-        .main-nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        .main-nav ul li a {
-            display: block;
-            color: var(--white);
-            text-decoration: none;
-            padding: 15px;
-            font-size: 16px;
-            font-weight: 500;
-            transition: background 0.3s;
-        }
-        
-        .main-nav ul li a:hover,
-        .main-nav ul li a.active {
-            background-color: var(--dark-blue);
-        }
-        
-        .main-nav .language-selector {
-            display: flex;
-            align-items: center;
-            color: var(--white);
-            cursor: pointer;
-            position: relative;
-            padding: 0 15px;
-        }
-        
-        .main-nav .language-selector i {
-            margin-left: 5px;
-        } */
-        
-        /* صفحة الفيديوهات */
-        /* .videos-header {
-            background-color: var(--main-blue);
+        .videos-header {
+            background-color: var(--third-color);
             padding: 30px 20px;
             text-align: center;
             color: var(--white);
@@ -115,13 +33,12 @@
         }
         
         .videos-header p {
-            max-width: 800px;
             margin: 0 auto;
             line-height: 1.6;
         }
-         */
+        
         /* أقسام الفيديوهات */
-        /* .video-categories {
+        .video-categories {
             background-color: var(--light-bg);
             padding: 15px 0;
             border-bottom: 1px solid #ddd;
@@ -141,7 +58,7 @@
         .video-categories ul li a {
             display: block;
             padding: 8px 15px;
-            background-color: var(--white);
+            background-color: #d8d6d6ab;
             color: var(--dark-blue);
             text-decoration: none;
             border-radius: 5px;
@@ -153,13 +70,13 @@
         
         .video-categories ul li a:hover,
         .video-categories ul li a.active {
-            background-color: var(--gold);
+            background-color: var(--main-blue);
             color: var(--white);
         }
-         */
+        
         /* قسم الفيديوهات */
-        /* .videos-section {
-            padding: 40px 20px;
+        .videos-section {
+            padding: 0px 20px;
         }
         
         .section-title {
@@ -193,10 +110,10 @@
         
         .section-title h2::after {
             left: 0;
-        } */
+        }
         
         /* شبكة الفيديوهات */
-        /* .videos-grid {
+        .videos-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 25px;
@@ -204,30 +121,8 @@
             margin: 0 auto;
         }
         
-        .video-card {
-            background-color: var(--white);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
         
-        .video-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        }
-        
-        .video-thumbnail {
-            position: relative;
-            background-color: var(--dark-blue);
-            aspect-ratio: 16/9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        
-        .video-thumbnail img {
+        .video-thumbnail iframe {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -239,7 +134,7 @@
             opacity: 0.7;
         }
         
-        .play-button {
+        /* .play-button {
             position: absolute;
             width: 50px;
             height: 50px;
@@ -252,50 +147,33 @@
             font-size: 20px;
             z-index: 1;
             transition: background-color 0.3s, transform 0.3s;
-        }
+        } */
         
-        .video-card:hover .play-button {
+        /* .video-card:hover .play-button {
             background-color: var(--gold);
             transform: scale(1.1);
-        }
+        } */
         
         .video-info {
             padding: 15px;
-        }
-        
-        .video-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: var(--dark-blue);
-        }
-        
+        }        
         .video-description {
-            font-size: 13px;
+            font-size: 14px;
             color: #666;
             margin-bottom: 12px;
             line-height: 1.5;
         }
-        
+/*         
         .video-meta {
             display: flex;
             justify-content: space-between;
             color: #777;
             font-size: 13px;
-        }
+        } */
+                
         
-        .video-meta span {
-            display: flex;
-            align-items: center;
-        }
-        
-        .video-meta i {
-            margin-left: 5px;
-            color: var(--gold);
-        }
-         */
         /* نافيجيشن الصفحات */
-        /* .pagination {
+        .pagination {
             display: flex;
             justify-content: center;
             margin-top: 40px;
@@ -328,77 +206,9 @@
         .pagination a.active {
             background-color: var(--main-blue);
             color: var(--white);
-        } */
-        
-        /* فوتر */
-        /* .footer {
-            background-color: var(--main-blue);
-            color: var(--white);
-            padding: 40px 20px 20px;
         }
         
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .footer-section h3 {
-            font-size: 18px;
-            color: var(--gold);
-            margin-bottom: 20px;
-            font-weight: 700;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        .footer-section h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--gold);
-        }
-        
-        .footer-section ul {
-            list-style: none;
-        }
-        
-        .footer-section ul li {
-            margin-bottom: 10px;
-        }
-        
-        .footer-section ul li a {
-            color: var(--gray);
-            text-decoration: none;
-            transition: color 0.3s;
-            display: flex;
-            align-items: center;
-        }
-        
-        .footer-section ul li a:hover {
-            color: var(--gold);
-        }
-        
-        .footer-section ul li a i {
-            margin-left: 8px;
-        }
-        
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            margin-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 14px;
-            color: var(--gray);
-        }
-         */
-        /* تجاوب الموقع */
-        /* @media (max-width: 768px) {
+        @media (max-width: 768px) {
             .top-header {
                 flex-direction: column;
                 gap: 10px;
@@ -435,4 +245,4 @@
             .videos-grid {
                 grid-template-columns: 1fr;
             }
-        } */
+        }

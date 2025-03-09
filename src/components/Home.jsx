@@ -3,14 +3,10 @@ import './home.css';
 import { useTranslation } from 'react-i18next';
 // import Logo from './imgs/logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { 
-  // faGlobe, 
-  //   faChevronDown, 
-    faArrowLeft, 
-    faCheckCircle 
-  } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { IoStar } from "react-icons/io5";
 import Header from './header'
+import Footer from './footer'
 
 const Home = () => {
 
@@ -129,7 +125,7 @@ const Home = () => {
     </aside>
     <div className="videos-section">
       <div className="section-title">
-        <h2>{t('أحدث الدروس')}</h2>
+        <h4>{t('أحدث الدروس')}</h4>
         <div className="ornament">
           <span></span>
           <span></span>
@@ -198,15 +194,7 @@ const Home = () => {
           </div>
         </div>
       )}
-    <footer>
-      <div className="footer-content">
-        <div className="footer-bottom">
-          <div className="copyright">
-            &copy; {new Date().getFullYear()} منصة منافع - جميع الحقوق محفوظة
-          </div>
-        </div>
-      </div>
-    </footer>
+      <Footer />
     </>
   );
 };
