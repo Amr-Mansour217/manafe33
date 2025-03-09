@@ -1,6 +1,6 @@
 import React from 'react';
 import ArQuran from "./pdfs/ar-quran.pdf";
-import EnQuran from "./pdfs/en-quran.pdf";
+import EnQuran from "./pdfs/fr-quran.pdf";
 import './pdf.css'; // تأكد من إنشاء هذا الملف
 
 function Pdf() {
