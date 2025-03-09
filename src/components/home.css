@@ -263,7 +263,9 @@ body {
 
 .video-thumbnail {
   position: relative;
-  height: 200px;
+  /* background-size: cover;
+  background-position: center; */
+  aspect-ratio: 16/9;
   background: linear-gradient(135deg, #2c3e50, #4a6491);
   overflow: hidden;
 }

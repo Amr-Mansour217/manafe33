@@ -1,6 +1,6 @@
 import React from 'react';
 import ArQuran from "./pdfs/ar-quran.pdf";
-import EnQuran from "./pdfs/en-quran.pdf";
+import FrQuran from "./pdfs/fr-quran.pdf";
 import './pdf.css'; // تأكد من إنشاء هذا الملف
 
 function Pdf() {
@@ -17,7 +17,7 @@ function Pdf() {
       </div>
       <div className="pdf-container">
         <embed 
-          src={EnQuran} 
+          src={FrQuran} 
           type="application/pdf" 
           width="100%" 
           height="100%" 

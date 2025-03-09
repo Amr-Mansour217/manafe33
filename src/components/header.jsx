@@ -43,8 +43,8 @@ function Header() {
       { path: "/videos", text: "الفيديوهات" },
       { path: "/quran", text: "القرآن الكريم" },
       { path: "/library", text: "الملفات التفاعلية" },
-      { path: "/about", text: "تطبيقات إسلامية" },
-      { path: "/contact", text: "مواقع إسلامية أخرى" }
+      { path: "/apps", text: "تطبيقات إسلامية" },
+      { path: "/anotherweb", text: "مواقع إسلامية أخرى" }
   ];
     
           

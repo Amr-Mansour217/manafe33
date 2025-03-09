@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './video.css';
 import Header from './header'
 import Footer from './footer'
@@ -8,27 +8,63 @@ import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons
 
 
 function Videos(){
-    const videos = [
-        {
-            id: 1,
-            title: 'أساسيات العقيدة الإسلامية',
-            description: 'شرح لأهم أصول العقيدة الإسلامية للمبتدئين ومجمل أركان الإيمان',
-            link: 'https://www.youtube.com/embed/FsDrBKQy7gM?si=h414kkga6ycM4r5o'
-        },
-        {
-            id: 2,
-            title: 'أساسيات العقيدة الإسلامية',
-            description: 'شرح لأهم أصول العقيدة الإسلامية للمبتدئين ومجمل أركان الإيمان',
-            link: 'https://www.youtube.com/embed/ZINjuzYQxX4?si=LIMh4FGyhj_5goO6'
-        },
-        {
-            id: 3,
-            title: 'أساسيات العقيدة الإسلامية',
-            description: 'شرح لأهم أصول العقيدة الإسلامية للمبتدئين ومجمل أركان الإيمان',
-            link: 'https://www.youtube.com/embed/tjp7wiUaPZk?si=QTrBLZ8nzMYXSliB'
-        },
+    const [activeCategory, setActiveCategory] = useState('all');
+    const categories = [
+        { id: 'all', name: 'جميع الفيديوهات' },
+        { id: 'aqeedah', name: 'العقيدة' },
+        { id: 'fiqh', name: 'الفقه' },
+        { id: 'tafseer', name: 'تفسير القرآن' },
+        { id: 'seerah', name: 'السيرة النبوية' },
+        { id: 'hadith', name: 'الحديث' },
+        { id: 'akhlaq', name: 'الأخلاق' },
+        { id: 'education', name: 'العلوم التربوية' },
     ]
 
+    
+    const allVideos = {
+        all: [
+            {
+                id: 1,
+                title: 'أساسيات العقيدة الإسلامية',
+                description: 'شرح لأهم أصول العقيدة الإسلامية للمبتدئين ومجمل أركان الإيمان',
+                link: 'https://www.youtube.com/embed/FsDrBKQy7gM?si=h414kkga6ycM4r5o'
+            },
+            {
+                id: 2,
+                title: 'فضائل شهر رمضان',
+                description: 'محاضرة عن فضائل شهر رمضان وأهميته في الإسلام',
+                link: 'https://www.youtube.com/embed/ZINjuzYQxX4?si=LIMh4FGyhj_5goO6'
+            },
+            {
+                id: 3,
+                title: 'السيرة النبوية',
+                description: 'دروس من حياة النبي محمد صلى الله عليه وسلم',
+                link: 'https://www.youtube.com/embed/tjp7wiUaPZk?si=QTrBLZ8nzMYXSliB'
+            },
+        ],
+        aqeedah: [
+            {
+                id: 4,
+                title: 'شرح العقيدة الطحاوية',
+                description: 'دروس مفصلة في شرح العقيدة الطحاوية',
+                link: 'https://www.youtube.com/embed/example1'
+            },
+        ],
+        fiqh: [
+            {
+                id: 5,
+                title: 'أحكام الصلاة',
+                description: 'شرح مفصل لأحكام الصلاة في الإسلام',
+                link: 'https://www.youtube.com/embed/example2'
+            },
+        ],
+    }
+    
+    const handleCategoryClick = (categoryId) => {
+        setActiveCategory(categoryId);
+    };
+
+    const filteredVideos = allVideos[activeCategory] || allVideos.all;
     return (
         <>
             <Header/>
@@ -37,18 +73,21 @@ function Videos(){
             <p>مجموعة مميزة من المحاضرات والدروس في علوم الشريعة والسيرة النبوية</p>
             </div>
 
-    <div class="video-categories">
-        <ul>
-            <li><a href="#" class="active">جميع الفيديوهات</a></li>
-            <li><a href="#">العقيدة</a></li>
-            <li><a href="#">الفقه</a></li>
-            <li><a href="#">تفسير القرآن</a></li>
-            <li><a href="#">السيرة النبوية</a></li>
-            <li><a href="#">الحديث</a></li>
-            <li><a href="#">الأخلاق</a></li>
-            <li><a href="#">العلوم التربوية</a></li>
-        </ul>
-    </div>
+            <div className="video-categories">
+                <ul>
+                    {categories.map(category => (
+                        <li key={category.id}>
+                            <a 
+                                href="#" 
+                                className={activeCategory === category.id ? 'active' : ''}
+                                onClick={() => handleCategoryClick(category.id)}
+                            >
+                                {category.name}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </div>
 
     <section class="videos-section">
         <div class="section-title">
@@ -56,20 +95,20 @@ function Videos(){
         </div>
 
         <div className="videos-grid">
-                    {videos.map(video => (
-                        <div key={video.id} className="video-card">
-                            <div className="video-thumbnail">
-                                <iframe src={video.link} alt={video.title} allowFullScreen ></iframe>
-                            </div>
-                            <div className="video-info">
-                                <h3 className="video-title">{video.title}</h3>
-                                <p className="video-description">{video.description}</p>
-                                <div className="video-meta">
-                                </div>
-                            </div>
+                {filteredVideos.map(video => (
+                    <div key={video.id} className="video-card">
+                        <div className="video-thumbnail">
+                            <iframe src={video.link} title={video.title} allowFullScreen></iframe>
                         </div>
-                    ))}
+                        <div className="video-info">
+                            <h3 className="video-title">{video.title}</h3>
+                            <p className="video-description">{video.description}</p>
+                            <div className="video-meta">
+                        </div>
+                    </div>
                 </div>
+            ))}
+        </div>
 
 
         <div class="pagination">
