@@ -14,13 +14,13 @@ function App() {
   return (
     <Router> 
       <Routes>
-        <Route path="/manafe33/" element={<Home />} />
-        <Route path="/manafe33/videos" element={<Videos />} />
-        <Route path="/manafee3/quran" element={<Quran />} />
-        <Route path = "/manafe33/library" element = {<Intre />} />
-        <Route path = "/manafe33/bigarabicquran" element = {<Pdf />} />
-        <Route path = "/manafe33/apps" element = {<Apps />} />
-        <Route path = "/manafe33/anotherweb" element = {<Another />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/videos" element={<Videos />} />
+        <Route path="/quran" element={<Quran />} />
+        <Route path = "/library" element = {<Intre />} />
+        <Route path = "/bigarabicquran" element = {<Pdf />} />
+        <Route path = "/apps" element = {<Apps />} />
+        <Route path = "/anotherweb" element = {<Another />} />
       </Routes>
     </Router>
   );
